@@ -1,7 +1,8 @@
+
+Author: Punit Vara <punitvara@gmail.com>
+
 https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase-i
           ------------how to check some ones commmit with SHA1 code
-
-git show <SHA1> will show the commit date, author, parent, and diff of files that changed from parent commit.
 
 git show <SHA1> will show the commit date, author, parent, and diff of files that changed from parent commit.
 
@@ -13,8 +14,6 @@ export GIT_EDITOR=vim
 
 
 --------------How to remove untacked file in git 
-
-git clean -f
 
 git clean -f
 
