@@ -1,0 +1,155 @@
+https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase-i
+          ------------how to check some ones commmit with SHA1 code
+
+git show <SHA1> will show the commit date, author, parent, and diff of files that changed from parent commit.
+
+git show <SHA1> will show the commit date, author, parent, and diff of files that changed from parent commit.
+
+-----------------how to set vim as default editor for git
+
+git config --global core.editor "vim"
+or 
+export GIT_EDITOR=vim
+
+
+--------------How to remove untacked file in git 
+
+git clean -f
+
+git clean -f
+
+But beware... there's no going back. Use -n (git clean -n) or --dry-run to preview the damage you'll do.
+
+If you want to also remove directories, run git clean -f -d or git clean -fd
+
+If you just want to remove ignored files, run git clean -f -X or git clean -fX
+
+If you want to remove ignored as well as non-ignored files, run git clean -f -x or git clean -fx
+
+Note the case difference on the X for the two latter commands.
+
+If clean.requireForce is set to "true" (the default) in your configuration, then unless you specify -f nothing will actually happen.
+
+------rebase error
+
+vi ./git/rebase-apply/patch 
+
+change anything that have any error 
+in case of error: while searching for:
+
+look at line number  in master and local branch ..
+
+change in patch must be wrong with the line ...
+
+git rebase --continue 
+
+git rebase --skip
+
+git rebase --abort
+
+
+-------How to apply patch in git 
+
+git apply *.patch 
+
+For reverse patch 
+
+git apply -R *.patch
+
+For more info 
+
+git apply -v *.patch 
+
+-------------To delete any branch 
+
+git checkout master 
+git branch -d branchname
+
+
+--------------------------------How to remove file from git repository 
+$ git rm --cached -- filename
+
+
+-------------How to remove commit in master .
+git reset --hard HEAD~1
+
+
+----------------------smart git (HOW TO CREATE PATCH AND APPLY)
+Creating a patch:
+
+    Open the Log
+    Pick a branch and right-click on a commit
+    Select "Format patch..." and save the file
+
+Applying a patch:
+
+    Open the Log
+    Go to "Tools" and then "Apply patch..."
+    Select the patch
+
+The patch will be applied on the branch that is currently checked out.
+
+---------To create last patch already so many are there -----------
+
+git format-patch -1
+
+-----How to edit your commit ?
+git commit --amend filename 
+
+After amend always do 
+
+git rebase --continue if you are satisfied with changes you have done
+
+----------How to sync local branch with master branch 
+
+git checkout master
+git pull
+git checkout my_local_branch
+git merge master
+
+
+-------How to go forward to commit or How to reset at any commit 
+
+To listout the previous changes which are recoverabal
+git reflog 
+it will be listed with SHA1
+
+git reset --hard <sha1>
+
+
+----------List out the previous log 
+
+git log 
+
+
+---------list out git log with graph 
+
+git log graph
+
+
+-------------git reset soft vs git reset hard--------------------------------
+
+git reset has three option 
+
+--mixed
+--soft
+--hard
+staged - if you run git diff and you find any changes after git add
+unstaged- if you run git diff and you find your changes unstaged or untracked 
+
+
+When you modify a file in your repository, the change is initially unstaged. In order to commit it, you must stage it—that is, add it to the index—using git add. When you make a commit, the changes that are committed are those that have been added to the index.
+
+git reset changes, at minimum, where the current branch (HEAD) is pointing. The difference between --mixed and --soft is whether or not your index is also modified. So, if we're on branch master with this series of commits:
+
+- A - B - C (master)
+HEADpoints to C and the index matches C.
+
+When we run git reset --soft B, master (and thus HEAD) now points to B, but the index still has the changes from C; git status will show them as staged. So if we run git commit at this point, we'll get a new commit with the same changes as C.
+
+Okay, so starting from here again:
+
+- A - B - C (master)
+Now let's do git reset --mixed B. Once again, master and HEAD point to B, but this time the index is also modified to match B. If we run git commit at this point, nothing will happen since the index matches HEAD. We still have the changes in the working directory, but since they're not in the index, git status shows them as unstaged. To commit them, you would git add and then commit as usual.
+
+And finally, --hard is the same as --mixed (it changes your HEAD and index), except that --hard also modifies your working directory. If we're at C and run git reset --hard B, then the changes added in C, as well as any uncommitted changes you have, will be removed, and the files in your working copy will match commit B. Since you can permanently lose changes this way, you should always run git status before doing a hard reset to make sure your working directory is clean or that you're okay with losing your uncommitted changes.
