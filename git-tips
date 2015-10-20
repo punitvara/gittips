@@ -1,8 +1,7 @@
-
-Author: Punit Vara <punitvara@gmail.com>
-
 https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase-i
           ------------how to check some ones commmit with SHA1 code
+
+git show <SHA1> will show the commit date, author, parent, and diff of files that changed from parent commit.
 
 git show <SHA1> will show the commit date, author, parent, and diff of files that changed from parent commit.
 
@@ -14,6 +13,8 @@ export GIT_EDITOR=vim
 
 
 --------------How to remove untacked file in git 
+
+git clean -f
 
 git clean -f
 
@@ -152,3 +153,44 @@ Okay, so starting from here again:
 Now let's do git reset --mixed B. Once again, master and HEAD point to B, but this time the index is also modified to match B. If we run git commit at this point, nothing will happen since the index matches HEAD. We still have the changes in the working directory, but since they're not in the index, git status shows them as unstaged. To commit them, you would git add and then commit as usual.
 
 And finally, --hard is the same as --mixed (it changes your HEAD and index), except that --hard also modifies your working directory. If we're at C and run git reset --hard B, then the changes added in C, as well as any uncommitted changes you have, will be removed, and the files in your working copy will match commit B. Since you can permanently lose changes this way, you should always run git status before doing a hard reset to make sure your working directory is clean or that you're okay with losing your uncommitted changes.
+
+--------------------------HOW to rebase and work with remote 
+
+git remote add gregkh URL
+
+git pull URL
+
+git rebase <branch>
+
+---------------------------To check remote repo branch 
+
+git remote show origin or git remote show gregkh
+
+
+--------how to check hiding branch in the git repo 
+git branch -a
+
+suppose 
+ master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/master
+  remotes/origin/rtlnew
+
+we can directly checkout at that branch to look at it 
+
+git checkout origin/rtlnew
+
+to work on that local branch we need to create local tracking branch by
+
+git checkout -b experimental origin/rtlnew
+
+you can check 
+Branch experimental set up to track remote branch experimental from origin.
+Switched to a new branch 'experimental'  
+
+now check git branch -a 
+
+you will find new experimental branch
+
+to get graphical view type
+gitk --all&
