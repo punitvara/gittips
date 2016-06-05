@@ -194,3 +194,11 @@ you will find new experimental branch
 
 to get graphical view type
 gitk --all&
+
+Once you have pushed commit and you want to delete it then 
+git reset --hard HEAD~1
+git push origin HEAD --force
+
+To temporary go to another commit 
+
+git checkout <commit-id>
